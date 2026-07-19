@@ -7,9 +7,12 @@ import {
   BACKING_STYLES,
   BackingEngine,
   BackingStyle,
+  InstrumentKind,
   chordSymbol,
   expandBars,
 } from "@/lib/backing";
+
+const VOL_DEFAULTS = { drums: 0.9, bass: 1.0, chords: 0.8 };
 
 export default function BackingTrackView() {
   const [styleId, setStyleId] = useState(BACKING_STYLES[0].id);
@@ -17,6 +20,8 @@ export default function BackingTrackView() {
   const [bpm, setBpm] = useState(BACKING_STYLES[0].bpm);
   const [playing, setPlaying] = useState(false);
   const [currentBar, setCurrentBar] = useState(-1);
+  const [currentBeat, setCurrentBeat] = useState(-1);
+  const [vol, setVol] = useState(VOL_DEFAULTS);
 
   const engineRef = useRef<BackingEngine | null>(null);
 
@@ -26,6 +31,17 @@ export default function BackingTrackView() {
   );
 
   const bars = useMemo(() => expandBars(style), [style]);
+
+  function applyCallbacks(eng: BackingEngine) {
+    eng.onBar = (b) => setCurrentBar(b);
+    eng.onBeat = (b) => setCurrentBeat(b);
+  }
+
+  function applyVolumes(eng: BackingEngine, v = vol) {
+    eng.setVolume("drums", v.drums);
+    eng.setVolume("bass", v.bass);
+    eng.setVolume("chords", v.chords);
+  }
 
   // Ao trocar de estilo, ajusta o BPM sugerido.
   useEffect(() => {
@@ -37,10 +53,18 @@ export default function BackingTrackView() {
     if (!playing) return;
     const eng = engineRef.current;
     if (!eng) return;
-    eng.onBar = (b) => setCurrentBar(b);
+    applyCallbacks(eng);
     eng.start(style, root, bpm);
+    applyVolumes(eng);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [style, root, bpm]);
+
+  // Volume é aplicado ao vivo, sem reiniciar.
+  useEffect(() => {
+    const eng = engineRef.current;
+    if (eng && playing) applyVolumes(eng);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [vol]);
 
   useEffect(() => {
     return () => {
@@ -54,12 +78,14 @@ export default function BackingTrackView() {
       engineRef.current?.stop();
       setPlaying(false);
       setCurrentBar(-1);
+      setCurrentBeat(-1);
       return;
     }
     if (!engineRef.current) engineRef.current = new BackingEngine();
     const eng = engineRef.current;
-    eng.onBar = (b) => setCurrentBar(b);
+    applyCallbacks(eng);
     eng.start(style, root, bpm);
+    applyVolumes(eng);
     setPlaying(true);
   }
 
@@ -123,6 +149,54 @@ export default function BackingTrackView() {
         >
           {playing ? "■ Parar" : "▶ Tocar base"}
         </button>
+      </div>
+
+      {/* contador de compasso */}
+      <div className="mt-5 flex items-center gap-3">
+        <span className="text-sm text-neutral-500">Tempo</span>
+        <div className="flex gap-2">
+          {[0, 1, 2, 3].map((b) => {
+            const ativo = playing && b === currentBeat;
+            return (
+              <div
+                key={b}
+                className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold border transition-colors ${
+                  ativo
+                    ? "bg-amber-500 border-amber-500 text-white scale-110"
+                    : "bg-white border-amber-800/20 text-amber-800/50"
+                }`}
+              >
+                {b + 1}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* volume por instrumento */}
+      <div className="mt-5 grid sm:grid-cols-3 gap-4">
+        {([
+          { kind: "drums", label: "Bateria" },
+          { kind: "bass", label: "Baixo" },
+          { kind: "chords", label: "Acordes" },
+        ] as { kind: InstrumentKind; label: string }[]).map(({ kind, label }) => (
+          <label key={kind} className="flex flex-col text-sm gap-1">
+            <span className="text-neutral-600">
+              {label}: {Math.round(vol[kind] * 100)}%
+            </span>
+            <input
+              type="range"
+              min={0}
+              max={1.4}
+              step={0.05}
+              value={vol[kind]}
+              onChange={(e) =>
+                setVol((v) => ({ ...v, [kind]: Number(e.target.value) }))
+              }
+              className="accent-amber-600"
+            />
+          </label>
+        ))}
       </div>
 
       {/* progressão */}

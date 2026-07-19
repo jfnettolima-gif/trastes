@@ -59,6 +59,8 @@ function bassLine(map: Record<number, number>): (number | null)[] {
   return p;
 }
 
+export type InstrumentKind = "drums" | "bass" | "chords";
+
 export const BACKING_STYLES: BackingStyle[] = [
   {
     id: "blues-shuffle",
@@ -168,6 +170,78 @@ export const BACKING_STYLES: BackingStyle[] = [
     bass: bassLine({ 0: 0, 4: 4, 8: 7, 12: 10 }),
     chordHits: on([2, 10]),
   },
+  {
+    id: "reggae",
+    nome: "Reggae",
+    descricao: "One-drop com o skank nos contratempos.",
+    bpm: 76,
+    swing: false,
+    chordMode: "block",
+    escalaSugerida: "Escala maior ou pentatônica maior",
+    escalaHref: "/pentatonica-maior/1",
+    progression: [
+      { off: 0, q: "maj" }, { off: 5, q: "maj" }, { off: 0, q: "maj" }, { off: 7, q: "maj" },
+    ],
+    kick: on([8]),
+    snare: on([8]),
+    hat: on([2, 6, 10, 14]),
+    bass: bassLine({ 0: 0, 3: 0, 8: 0, 11: 12 }),
+    chordHits: on([2, 6, 10, 14]),
+  },
+  {
+    id: "bossa",
+    nome: "Bossa Nova",
+    descricao: "Balanço suave com acordes de sétima.",
+    bpm: 130,
+    swing: false,
+    chordMode: "block",
+    escalaSugerida: "Escala maior e modos",
+    escalaHref: "/modos-gregos/jonio",
+    progression: [
+      { off: 0, q: "maj7" }, { off: 2, q: "min7" }, { off: 7, q: "dom7" }, { off: 0, q: "maj7" },
+    ],
+    kick: on([0, 6, 8, 14]),
+    snare: on([3, 10]),
+    hat: on([0, 2, 4, 6, 8, 10, 12, 14]),
+    bass: bassLine({ 0: 0, 4: 7, 8: 0, 12: 7 }),
+    chordHits: on([0, 6, 10]),
+  },
+  {
+    id: "metal",
+    nome: "Metal",
+    descricao: "Chugging pesado e rápido em tom menor.",
+    bpm: 150,
+    swing: false,
+    chordMode: "block",
+    escalaSugerida: "Pentatônica menor ou frígio",
+    escalaHref: "/modos-gregos/frigio",
+    progression: [
+      { off: 0, q: "min" }, { off: 0, q: "min" }, { off: 8, q: "maj" }, { off: 10, q: "maj" },
+    ],
+    kick: on([0, 2, 4, 6, 8, 10, 12, 14]),
+    snare: on([4, 12]),
+    hat: on([0, 2, 4, 6, 8, 10, 12, 14]),
+    bass: bassLine({ 0: 0, 2: 0, 4: 0, 6: 0, 8: 0, 10: 0, 12: 0, 14: 0 }),
+    chordHits: on([0, 4, 8, 12]),
+  },
+  {
+    id: "sertanejo",
+    nome: "Sertanejo / Country",
+    descricao: "Baixo alternado (boom-chick) bem alegre.",
+    bpm: 100,
+    swing: false,
+    chordMode: "block",
+    escalaSugerida: "Escala maior ou pentatônica maior",
+    escalaHref: "/escala-maior/1",
+    progression: [
+      { off: 0, q: "maj" }, { off: 7, q: "maj" }, { off: 9, q: "min" }, { off: 5, q: "maj" },
+    ],
+    kick: on([0, 8]),
+    snare: on([4, 12]),
+    hat: on([0, 2, 4, 6, 8, 10, 12, 14]),
+    bass: bassLine({ 0: 0, 4: 7, 8: 0, 12: 7 }),
+    chordHits: on([4, 12]),
+  },
 ];
 
 export function chordSymbol(root: NoteName, off: number, q: ChordQuality): string {
@@ -191,6 +265,9 @@ function midiToFreq(midi: number): number {
 export class BackingEngine {
   private ctx: AudioContext;
   private master: GainNode;
+  private drumGain: GainNode;
+  private bassGain: GainNode;
+  private chordGain: GainNode;
   private noise: AudioBuffer;
   private timer: ReturnType<typeof setInterval> | null = null;
   private step = 0;
@@ -202,6 +279,7 @@ export class BackingEngine {
   private bars: ProgChord[] = [];
   playing = false;
   onBar?: (barIndex: number) => void;
+  onBeat?: (beatInBar: number) => void;
 
   constructor() {
     this.ctx = new (window.AudioContext ||
@@ -211,6 +289,16 @@ export class BackingEngine {
     this.master.gain.value = 0.9;
     this.master.connect(comp);
     comp.connect(this.ctx.destination);
+
+    this.drumGain = this.ctx.createGain();
+    this.bassGain = this.ctx.createGain();
+    this.chordGain = this.ctx.createGain();
+    this.drumGain.gain.value = 0.9;
+    this.bassGain.gain.value = 1.0;
+    this.chordGain.gain.value = 0.8;
+    this.drumGain.connect(this.master);
+    this.bassGain.connect(this.master);
+    this.chordGain.connect(this.master);
 
     const len = this.ctx.sampleRate * 1;
     this.noise = this.ctx.createBuffer(1, len, this.ctx.sampleRate);
@@ -238,6 +326,12 @@ export class BackingEngine {
     if (this.timer) clearInterval(this.timer);
     this.timer = null;
     this.playing = false;
+  }
+
+  setVolume(kind: InstrumentKind, value: number) {
+    const node =
+      kind === "drums" ? this.drumGain : kind === "bass" ? this.bassGain : this.chordGain;
+    node.gain.setTargetAtTime(value, this.ctx.currentTime, 0.02);
   }
 
   dispose() {
@@ -300,6 +394,12 @@ export class BackingEngine {
       const when = (t - this.ctx.currentTime) * 1000;
       setTimeout(() => this.onBar && this.onBar(b), Math.max(0, when));
     }
+
+    if (step % 4 === 0 && this.onBeat) {
+      const beat = step / 4;
+      const when = (t - this.ctx.currentTime) * 1000;
+      setTimeout(() => this.onBeat && this.onBeat(beat), Math.max(0, when));
+    }
   }
 
   private kick(t: number) {
@@ -310,7 +410,7 @@ export class BackingEngine {
     g.gain.setValueAtTime(0.9, t);
     g.gain.exponentialRampToValueAtTime(0.001, t + 0.16);
     osc.connect(g);
-    g.connect(this.master);
+    g.connect(this.drumGain);
     osc.start(t);
     osc.stop(t + 0.18);
   }
@@ -326,7 +426,7 @@ export class BackingEngine {
     g.gain.exponentialRampToValueAtTime(0.001, t + 0.14);
     src.connect(bp);
     bp.connect(g);
-    g.connect(this.master);
+    g.connect(this.drumGain);
     src.start(t);
     src.stop(t + 0.16);
   }
@@ -342,7 +442,7 @@ export class BackingEngine {
     g.gain.exponentialRampToValueAtTime(0.001, t + 0.045);
     src.connect(hp);
     hp.connect(g);
-    g.connect(this.master);
+    g.connect(this.drumGain);
     src.start(t);
     src.stop(t + 0.06);
   }
@@ -360,7 +460,7 @@ export class BackingEngine {
     g.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
     osc.connect(lp);
     lp.connect(g);
-    g.connect(this.master);
+    g.connect(this.bassGain);
     osc.start(t);
     osc.stop(t + 0.24);
   }
@@ -381,7 +481,7 @@ export class BackingEngine {
     g.gain.setValueAtTime(0.0001, t);
     g.gain.exponentialRampToValueAtTime(0.13, t + 0.02);
     g.gain.exponentialRampToValueAtTime(0.001, t + dur);
-    g.connect(this.master);
+    g.connect(this.chordGain);
     osc.start(t);
     osc2.start(t);
     osc.stop(t + dur + 0.05);
