@@ -73,6 +73,9 @@ export default async function AppShell({
             <Link href="/ritmo" className="hover:text-amber-300">
               Ritmo
             </Link>
+            <Link href="/backing-tracks" className="hover:text-amber-300">
+              Backing tracks
+            </Link>
             <Link href="/metronomo" className="hover:text-amber-300">
               Metrônomo
             </Link>

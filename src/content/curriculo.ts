@@ -173,6 +173,14 @@ export const MODULOS: Modulo[] = [
       { key: "ritmo.levadas", titulo: "Levadas e palhetada", href: "/ritmo/levadas" },
     ],
   },
+  {
+    slug: "backing-tracks",
+    titulo: "Backing tracks",
+    descricao: "Bases de acompanhamento em vários estilos e tons para praticar as escalas.",
+    licoes: [
+      { key: "backing-tracks.pratica", titulo: "Praticar com backing track", href: "/backing-tracks" },
+    ],
+  },
 ];
 
 export function todasAsLicoes() {
