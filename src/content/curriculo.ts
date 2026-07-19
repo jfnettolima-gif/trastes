@@ -134,6 +134,14 @@ export const MODULOS: Modulo[] = [
       { key: "caged.teoria", titulo: "Sistema CAGED", href: "/caged" },
     ],
   },
+  {
+    slug: "circulo-de-quintas",
+    titulo: "Círculo das quintas",
+    descricao: "O mapa das 12 tonalidades, armaduras de clave e relativas menores.",
+    licoes: [
+      { key: "circulo-de-quintas.teoria", titulo: "Círculo das quintas", href: "/circulo-de-quintas" },
+    ],
+  },
 ];
 
 export function todasAsLicoes() {

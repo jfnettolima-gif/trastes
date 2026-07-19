@@ -61,6 +61,9 @@ export default async function AppShell({
             <Link href="/caged" className="hover:text-amber-300">
               CAGED
             </Link>
+            <Link href="/circulo-de-quintas" className="hover:text-amber-300">
+              Círculo das quintas
+            </Link>
             <Link href="/metronomo" className="hover:text-amber-300">
               Metrônomo
             </Link>
