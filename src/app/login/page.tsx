@@ -1,7 +1,6 @@
 "use client";
 
 import { useActionState } from "react";
-import Link from "next/link";
 import { login, type LoginState } from "./actions";
 
 const initialState: LoginState = {};
@@ -49,10 +48,8 @@ export default function LoginPage() {
         </form>
 
         <p className="mt-6 text-sm text-neutral-500">
-          Ainda não tem conta?{" "}
-          <Link href="/cadastro" className="text-amber-700 font-medium">
-            Criar conta
-          </Link>
+          O acesso é restrito. Se você ainda não tem uma conta, fale com o
+          administrador.
         </p>
       </div>
     </div>

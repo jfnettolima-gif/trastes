@@ -10,11 +10,8 @@ export default function LandingPage() {
           e improvisação, passo a passo.
         </p>
         <div className="mt-8 flex items-center justify-center gap-4">
-          <Link href="/cadastro" className="btn-primary">
-            Começar agora
-          </Link>
-          <Link href="/login" className="btn-secondary text-amber-50 border-amber-50">
-            Já tenho conta
+          <Link href="/login" className="btn-primary">
+            Entrar
           </Link>
         </div>
 
