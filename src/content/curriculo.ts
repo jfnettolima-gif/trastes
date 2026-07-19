@@ -142,6 +142,14 @@ export const MODULOS: Modulo[] = [
       { key: "circulo-de-quintas.teoria", titulo: "Círculo das quintas", href: "/circulo-de-quintas" },
     ],
   },
+  {
+    slug: "progressoes-harmonicas",
+    titulo: "Progressões harmônicas",
+    descricao: "As sequências de acordes por grau que sustentam quase toda a música.",
+    licoes: [
+      { key: "progressoes-harmonicas.teoria", titulo: "Progressões harmônicas", href: "/progressoes-harmonicas" },
+    ],
+  },
 ];
 
 export function todasAsLicoes() {

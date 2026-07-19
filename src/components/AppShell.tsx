@@ -64,6 +64,9 @@ export default async function AppShell({
             <Link href="/circulo-de-quintas" className="hover:text-amber-300">
               Círculo das quintas
             </Link>
+            <Link href="/progressoes-harmonicas" className="hover:text-amber-300">
+              Progressões
+            </Link>
             <Link href="/metronomo" className="hover:text-amber-300">
               Metrônomo
             </Link>
