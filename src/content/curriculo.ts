@@ -150,6 +150,18 @@ export const MODULOS: Modulo[] = [
       { key: "progressoes-harmonicas.teoria", titulo: "Progressões harmônicas", href: "/progressoes-harmonicas" },
     ],
   },
+  {
+    slug: "tecnicas",
+    titulo: "Técnicas de mão",
+    descricao: "Ligados, bends, vibrato, slides e palm mute: a expressão do instrumento.",
+    licoes: [
+      { key: "tecnicas.hammer-on-pull-off", titulo: "Hammer-on e pull-off", href: "/tecnicas/hammer-on-pull-off" },
+      { key: "tecnicas.bend", titulo: "Bend", href: "/tecnicas/bend" },
+      { key: "tecnicas.vibrato", titulo: "Vibrato", href: "/tecnicas/vibrato" },
+      { key: "tecnicas.slide", titulo: "Slide", href: "/tecnicas/slide" },
+      { key: "tecnicas.palm-mute", titulo: "Palm mute", href: "/tecnicas/palm-mute" },
+    ],
+  },
 ];
 
 export function todasAsLicoes() {

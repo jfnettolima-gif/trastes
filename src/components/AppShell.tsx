@@ -67,6 +67,9 @@ export default async function AppShell({
             <Link href="/progressoes-harmonicas" className="hover:text-amber-300">
               Progressões
             </Link>
+            <Link href="/tecnicas" className="hover:text-amber-300">
+              Técnicas
+            </Link>
             <Link href="/metronomo" className="hover:text-amber-300">
               Metrônomo
             </Link>
