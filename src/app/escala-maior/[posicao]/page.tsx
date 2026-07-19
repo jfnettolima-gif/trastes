@@ -4,6 +4,7 @@ import { requireUser } from "@/lib/auth";
 import AppShell from "@/components/AppShell";
 import MarkComplete from "@/components/MarkComplete";
 import ThreeNpsView from "@/components/ThreeNpsView";
+import GuiaEscala from "@/components/GuiaEscala";
 
 export default async function EscalaMaiorPosicaoPage({
   params,
@@ -31,29 +32,20 @@ export default async function EscalaMaiorPosicaoPage({
         <ThreeNpsView positionNumber={posNumber} scaleKey="escalaMaior" />
       </div>
 
+      <GuiaEscala sistema="3nps" />
+
       <div className="card p-6 mt-4 space-y-3 text-neutral-700 leading-relaxed">
-        <h2 className="font-semibold text-amber-900">Exercícios</h2>
+        <h2 className="font-semibold text-amber-900">Ideias para esta posição</h2>
         <p>
-          <strong>Ascendente e descendente:</strong> toque as 3 notas de cada corda,
-          da corda mais grave para a mais aguda e depois de volta, com metrônomo em
-          andamento lento.
+          <strong>Resolva nas notas do acorde:</strong> a escala maior forma o acorde
+          maior com sétima maior (1 - 3 - 5 - 7). Ao improvisar, termine as frases numa
+          dessas quatro notas, principalmente na tônica ou na 3ª, para o solo soar
+          "encaixado".
         </p>
         <p>
-          <strong>Ligados:</strong> como há 3 notas por corda, essa posição é perfeita
-          para treinar hammer-on subindo e pull-off descendo, palhetando só a primeira
-          nota de cada corda.
-        </p>
-        <p>
-          <strong>Sequência de 3:</strong> toque as notas em grupos (1-2-3, 2-3-4,
-          3-4-5...) para soltar os dedos e criar frases mais musicais.
-        </p>
-        <p>
-          <strong>Ache a tônica:</strong> as bolinhas vermelhas são a tônica. Comece e
-          termine sempre nelas para ouvir o "repouso" da escala maior.
-        </p>
-        <p>
-          <strong>Conexão:</strong> depois de dominar esta posição, toque as últimas
-          notas dela e emende direto na posição seguinte, sem parar.
+          <strong>Ouça a sensível:</strong> o 7º grau (a sétima maior) fica a apenas um
+          semitom da tônica e "puxa" fortemente para ela. Toque 7 → 1 algumas vezes
+          para sentir essa resolução, que é a assinatura do som maior.
         </p>
       </div>
 

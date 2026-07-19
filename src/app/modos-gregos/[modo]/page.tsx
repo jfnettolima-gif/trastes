@@ -4,6 +4,7 @@ import { requireUser } from "@/lib/auth";
 import AppShell from "@/components/AppShell";
 import MarkComplete from "@/components/MarkComplete";
 import ThreeNpsExplorer from "@/components/ThreeNpsExplorer";
+import GuiaEscala from "@/components/GuiaEscala";
 import { ScaleKey } from "@/lib/music";
 
 const MODOS: Record<
@@ -130,8 +131,10 @@ export default async function ModoPage({
         <ThreeNpsExplorer scaleKey={info.scaleKey} defaultRoot="A" rootLabel={info.rootLabel} />
       </div>
 
+      <GuiaEscala sistema="3nps" />
+
       <div className="card p-6 mt-4 space-y-3 text-neutral-700 leading-relaxed">
-        <h2 className="font-semibold text-amber-900">Exercícios</h2>
+        <h2 className="font-semibold text-amber-900">Ideias para este modo</h2>
         <p>
           <strong>Ache a nota característica:</strong> toque a escala e pare na nota que
           dá nome ao modo. É ela que você precisa enfatizar para o modo "soar".

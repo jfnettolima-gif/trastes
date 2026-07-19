@@ -4,6 +4,7 @@ import { requireUser } from "@/lib/auth";
 import AppShell from "@/components/AppShell";
 import MarkComplete from "@/components/MarkComplete";
 import ScaleShapeView from "@/components/ScaleShapeView";
+import GuiaEscala from "@/components/GuiaEscala";
 
 export default async function PentatonicShapePage({
   params,
@@ -31,21 +32,10 @@ export default async function PentatonicShapePage({
         <ScaleShapeView shapeNumber={shapeNumber} scaleKey="pentatonicaMenor" />
       </div>
 
+      <GuiaEscala sistema="caixa" />
+
       <div className="card p-6 mt-4 space-y-3 text-neutral-700 leading-relaxed">
-        <h2 className="font-semibold text-amber-900">Exercícios</h2>
-        <p>
-          <strong>Ascendente:</strong> toque todas as notas marcadas deste desenho da
-          corda mais grave para a mais aguda, uma de cada vez, com metrônomo em
-          andamento lento.
-        </p>
-        <p>
-          <strong>Descendente:</strong> faça o caminho inverso, da corda mais aguda
-          para a mais grave.
-        </p>
-        <p>
-          <strong>Grupos de 3 e de 4 notas:</strong> em vez de tocar nota por nota,
-          agrupe em blocos de 3 e depois de 4, sempre voltando à tônica.
-        </p>
+        <h2 className="font-semibold text-amber-900">Ideias para este desenho</h2>
         <p>
           <strong>Memorização:</strong> tente tocar o desenho de olhos fechados ou sem
           olhar para as mãos, só de ouvido.

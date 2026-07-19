@@ -4,6 +4,7 @@ import { requireUser } from "@/lib/auth";
 import AppShell from "@/components/AppShell";
 import MarkComplete from "@/components/MarkComplete";
 import ScaleShapeView from "@/components/ScaleShapeView";
+import GuiaEscala from "@/components/GuiaEscala";
 
 export default async function EscalaBluesShapePage({
   params,
@@ -36,20 +37,14 @@ export default async function EscalaBluesShapePage({
         />
       </div>
 
+      <GuiaEscala sistema="caixa" />
+
       <div className="card p-6 mt-4 space-y-3 text-neutral-700 leading-relaxed">
-        <h2 className="font-semibold text-amber-900">Exercícios</h2>
-        <p>
-          <strong>Ascendente:</strong> toque todas as notas marcadas deste desenho da
-          corda mais grave para a mais aguda, uma de cada vez, com metrônomo em
-          andamento lento.
-        </p>
-        <p>
-          <strong>Descendente:</strong> faça o caminho inverso, da corda mais aguda
-          para a mais grave.
-        </p>
+        <h2 className="font-semibold text-amber-900">Ideias para este desenho</h2>
         <p>
           <strong>Nota de passagem:</strong> encontre a b5 marcada no desenho e
-          pratique tocá-la rapidamente entre a 4 e a 5, sem parar nela.
+          pratique tocá-la rapidamente entre a 4 e a 5, sem parar nela. É a "blue
+          note" que dá o tempero, mas ela pede passagem, não repouso.
         </p>
         <p>
           <strong>Bend:</strong> na nota da 4ª (quarta), tente puxar a corda até o

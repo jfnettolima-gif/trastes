@@ -4,6 +4,7 @@ import { requireUser } from "@/lib/auth";
 import AppShell from "@/components/AppShell";
 import MarkComplete from "@/components/MarkComplete";
 import ThreeNpsExplorer from "@/components/ThreeNpsExplorer";
+import GuiaEscala from "@/components/GuiaEscala";
 import { ScaleKey } from "@/lib/music";
 
 const TIPOS: Record<
@@ -71,11 +72,14 @@ export default async function EscalaMenorPage({
         <ThreeNpsExplorer scaleKey={info.scaleKey} defaultRoot="A" rootLabel="menor" />
       </div>
 
+      <GuiaEscala sistema="3nps" />
+
       <div className="card p-6 mt-4 space-y-3 text-neutral-700 leading-relaxed">
-        <h2 className="font-semibold text-amber-900">Exercícios</h2>
+        <h2 className="font-semibold text-amber-900">Ideias para esta escala</h2>
         <p>
-          <strong>Toque as 7 posições:</strong> use os botões de posição para percorrer
-          o braço inteiro, sempre com metrônomo lento e começando/terminando na tônica.
+          <strong>Percorra as 7 posições:</strong> use os botões de posição acima para
+          tocar a mesma escala em diferentes pontos do braço, sempre da mais grave para
+          a mais aguda, conectando uma na outra.
         </p>
         <p>
           <strong>Ouça a diferença:</strong> toque a menor natural e depois esta escala
