@@ -96,6 +96,14 @@ export const MODULOS: Modulo[] = [
       { key: "escalas-menores.melodica", titulo: "Menor melódica", href: "/escalas-menores/melodica" },
     ],
   },
+  {
+    slug: "campo-harmonico",
+    titulo: "Campo harmônico",
+    descricao: "Os acordes que nascem de cada escala e como usá-los em progressões.",
+    licoes: [
+      { key: "campo-harmonico.teoria", titulo: "Campo harmônico", href: "/campo-harmonico" },
+    ],
+  },
 ];
 
 export function todasAsLicoes() {

@@ -302,4 +302,75 @@ export function asciiTabFromFrets(stringFrets: number[][]): string {
   return lines.join("\n");
 }
 
+// Campo harmônico: as tríades que nascem empilhando terças (1-3-5) sobre cada
+// grau de uma escala, usando SÓ as notas da própria escala. A qualidade de
+// cada acorde (maior, menor, diminuto, aumentado) é deduzida dos intervalos
+// resultantes, não decorada, então vale para qualquer escala de 7 notas.
+export type TriadQuality = "maior" | "menor" | "diminuto" | "aumentado";
+
+export type DiatonicTriad = {
+  degree: number; // 1..7
+  roman: string; // I, ii, iii, IV, V, vi, vii° ...
+  rootNote: NoteName;
+  quality: TriadQuality;
+  symbol: string; // ex.: "C", "Dm", "Bdim", "Caug"
+  notes: NoteName[]; // as 3 notas do acorde
+};
+
+const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII"];
+
+function triadQuality(thirdSemis: number, fifthSemis: number): TriadQuality {
+  if (thirdSemis === 4 && fifthSemis === 7) return "maior";
+  if (thirdSemis === 3 && fifthSemis === 7) return "menor";
+  if (thirdSemis === 3 && fifthSemis === 6) return "diminuto";
+  if (thirdSemis === 4 && fifthSemis === 8) return "aumentado";
+  // fallback: aproxima pela terça
+  return thirdSemis <= 3 ? "menor" : "maior";
+}
+
+export function diatonicTriads(
+  rootNote: NoteName,
+  scaleKey: ScaleKey = "escalaMaior"
+): DiatonicTriad[] {
+  const rootPc = pitchClass(rootNote);
+  const intervals = SCALES[scaleKey].intervals;
+  if (intervals.length !== 7) return []; // só faz sentido para escalas de 7 notas
+  const scalePcs = intervals.map((iv) => (rootPc + iv) % 12);
+
+  const triads: DiatonicTriad[] = [];
+  for (let i = 0; i < 7; i++) {
+    const rPc = scalePcs[i];
+    const thirdPc = scalePcs[(i + 2) % 7];
+    const fifthPc = scalePcs[(i + 4) % 7];
+    const thirdSemis = ((thirdPc - rPc) % 12 + 12) % 12;
+    const fifthSemis = ((fifthPc - rPc) % 12 + 12) % 12;
+    const quality = triadQuality(thirdSemis, fifthSemis);
+
+    let roman = ROMAN[i];
+    if (quality === "menor" || quality === "diminuto") roman = roman.toLowerCase();
+    if (quality === "diminuto") roman += "°";
+    if (quality === "aumentado") roman += "+";
+
+    const noteName = noteNameFromPitchClass(rPc);
+    const symbol =
+      quality === "maior"
+        ? noteName
+        : quality === "menor"
+        ? `${noteName}m`
+        : quality === "diminuto"
+        ? `${noteName}dim`
+        : `${noteName}aug`;
+
+    triads.push({
+      degree: i + 1,
+      roman,
+      rootNote: noteName,
+      quality,
+      symbol,
+      notes: [rPc, thirdPc, fifthPc].map(noteNameFromPitchClass),
+    });
+  }
+  return triads;
+}
+
 export const ALL_NOTES: NoteName[] = [...NOTE_NAMES];

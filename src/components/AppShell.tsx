@@ -43,6 +43,9 @@ export default function AppShell({
             <Link href="/escalas-menores" className="hover:text-amber-300">
               Escalas menores
             </Link>
+            <Link href="/campo-harmonico" className="hover:text-amber-300">
+              Campo harmônico
+            </Link>
             <Link href="/metronomo" className="hover:text-amber-300">
               Metrônomo
             </Link>
