@@ -1,10 +1,12 @@
 import Link from "next/link";
+import LesPaulEmblem from "@/components/LesPaulEmblem";
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-[#241a12] text-amber-50">
-      <div className="max-w-4xl mx-auto px-4 py-20 text-center">
-        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">🎸 Trastes</h1>
+    <div className="min-h-screen bg-[#241a12] text-amber-50 overflow-hidden">
+      <div className="max-w-4xl mx-auto px-4 py-16 text-center">
+        <LesPaulEmblem className="mx-auto w-56 sm:w-72 h-auto drop-shadow-[0_10px_30px_rgba(0,0,0,0.6)]" />
+        <h1 className="mt-4 text-4xl sm:text-5xl font-bold tracking-tight">Trastes</h1>
         <p className="mt-4 text-lg text-amber-100/80">
           Aprenda guitarra do jeito certo: escalas, braço interativo, teoria aplicada
           e improvisação, passo a passo.
