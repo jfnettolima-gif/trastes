@@ -118,6 +118,14 @@ export const MODULOS: Modulo[] = [
       { key: "modos-gregos.locrio", titulo: "Lócrio", href: "/modos-gregos/locrio" },
     ],
   },
+  {
+    slug: "arpejos",
+    titulo: "Arpejos",
+    descricao: "As notas de cada acorde espalhadas pelo braço, as notas-alvo do solo.",
+    licoes: [
+      { key: "arpejos.teoria", titulo: "Arpejos", href: "/arpejos" },
+    ],
+  },
 ];
 
 export function todasAsLicoes() {

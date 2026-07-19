@@ -49,6 +49,9 @@ export default function AppShell({
             <Link href="/modos-gregos" className="hover:text-amber-300">
               Modos gregos
             </Link>
+            <Link href="/arpejos" className="hover:text-amber-300">
+              Arpejos
+            </Link>
             <Link href="/metronomo" className="hover:text-amber-300">
               Metrônomo
             </Link>
