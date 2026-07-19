@@ -104,6 +104,20 @@ export const MODULOS: Modulo[] = [
       { key: "campo-harmonico.teoria", titulo: "Campo harmônico", href: "/campo-harmonico" },
     ],
   },
+  {
+    slug: "modos-gregos",
+    titulo: "Modos gregos",
+    descricao: "As 7 cores da escala maior: jônio, dórico, frígio, lídio, mixolídio, eólio e lócrio.",
+    licoes: [
+      { key: "modos-gregos.jonio", titulo: "Jônio", href: "/modos-gregos/jonio" },
+      { key: "modos-gregos.dorico", titulo: "Dórico", href: "/modos-gregos/dorico" },
+      { key: "modos-gregos.frigio", titulo: "Frígio", href: "/modos-gregos/frigio" },
+      { key: "modos-gregos.lidio", titulo: "Lídio", href: "/modos-gregos/lidio" },
+      { key: "modos-gregos.mixolidio", titulo: "Mixolídio", href: "/modos-gregos/mixolidio" },
+      { key: "modos-gregos.eolio", titulo: "Eólio", href: "/modos-gregos/eolio" },
+      { key: "modos-gregos.locrio", titulo: "Lócrio", href: "/modos-gregos/locrio" },
+    ],
+  },
 ];
 
 export function todasAsLicoes() {

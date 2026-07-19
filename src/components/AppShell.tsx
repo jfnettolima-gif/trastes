@@ -46,6 +46,9 @@ export default function AppShell({
             <Link href="/campo-harmonico" className="hover:text-amber-300">
               Campo harmônico
             </Link>
+            <Link href="/modos-gregos" className="hover:text-amber-300">
+              Modos gregos
+            </Link>
             <Link href="/metronomo" className="hover:text-amber-300">
               Metrônomo
             </Link>

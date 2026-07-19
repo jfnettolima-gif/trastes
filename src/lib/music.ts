@@ -59,7 +59,12 @@ export type ScaleKey =
   | "escalaMaior"
   | "menorNatural"
   | "menorHarmonica"
-  | "menorMelodica";
+  | "menorMelodica"
+  | "dorico"
+  | "frigio"
+  | "lidio"
+  | "mixolidio"
+  | "locrio";
 
 export const SCALES: Record<
   ScaleKey,
@@ -99,6 +104,31 @@ export const SCALES: Record<
     label: "Menor melódica",
     intervals: [0, 2, 3, 5, 7, 9, 11],
     formula: "1 - 2 - b3 - 4 - 5 - 6 - 7",
+  },
+  dorico: {
+    label: "Dórico",
+    intervals: [0, 2, 3, 5, 7, 9, 10],
+    formula: "1 - 2 - b3 - 4 - 5 - 6 - b7",
+  },
+  frigio: {
+    label: "Frígio",
+    intervals: [0, 1, 3, 5, 7, 8, 10],
+    formula: "1 - b2 - b3 - 4 - 5 - b6 - b7",
+  },
+  lidio: {
+    label: "Lídio",
+    intervals: [0, 2, 4, 6, 7, 9, 11],
+    formula: "1 - 2 - 3 - #4 - 5 - 6 - 7",
+  },
+  mixolidio: {
+    label: "Mixolídio",
+    intervals: [0, 2, 4, 5, 7, 9, 10],
+    formula: "1 - 2 - 3 - 4 - 5 - 6 - b7",
+  },
+  locrio: {
+    label: "Lócrio",
+    intervals: [0, 1, 3, 5, 6, 8, 10],
+    formula: "1 - b2 - b3 - 4 - b5 - b6 - b7",
   },
 };
 
