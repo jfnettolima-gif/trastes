@@ -403,4 +403,73 @@ export function diatonicTriads(
   return triads;
 }
 
+// Sistema CAGED: as 5 formas de acorde maior (C, A, G, E, D) que, movidas
+// pelo braço, tocam qualquer acorde maior e se conectam em sequência. Cada
+// forma é descrita como um "molde" de graus por corda (0 = tônica, 4 = terça
+// maior, 7 = quinta justa; null = corda abafada). A partir do molde e da
+// tônica escolhida, as casas são calculadas por teoria: para cada corda,
+// acha-se a casa que produz o grau pedido mais próxima da âncora da forma.
+export const CAGED_ORDER = ["C", "A", "G", "E", "D"] as const;
+export type CagedShape = (typeof CAGED_ORDER)[number];
+
+const CAGED_TEMPLATES: Record<CagedShape, (number | null)[]> = {
+  // ordem das cordas: 0 = 6ª (Mi grave) ... 5 = 1ª (Mi agudo)
+  C: [null, 0, 4, 7, 0, 4],
+  A: [null, 0, 7, 0, 4, 7],
+  G: [0, 4, 7, 0, 4, 0],
+  E: [0, 7, 0, 4, 7, 0],
+  D: [null, null, 0, 7, 0, 4],
+};
+
+export type CagedResult = {
+  shape: CagedShape;
+  frets: (number | null)[]; // casa por corda (null = abafada)
+  roles: (number | null)[]; // grau por corda (0/4/7), ou null
+  minFret: number;
+  maxFret: number;
+};
+
+export function cagedShape(rootNote: NoteName, shape: CagedShape): CagedResult {
+  const rootPc = pitchClass(rootNote);
+  const tpl = CAGED_TEMPLATES[shape];
+  const openPc = STANDARD_TUNING.map((t) => pitchClass(t.note));
+
+  const anchorString = tpl.findIndex((r) => r !== null);
+  const anchorPc = (rootPc + (tpl[anchorString] as number)) % 12;
+  const anchorFret = ((anchorPc - openPc[anchorString]) % 12 + 12) % 12;
+
+  const frets = tpl.map((role, s) => {
+    if (role === null) return null;
+    const pc = (rootPc + role) % 12;
+    const base = ((pc - openPc[s]) % 12 + 12) % 12;
+    let best = base;
+    let bestDist = Infinity;
+    for (let f = base; f <= base + 24; f += 12) {
+      const d = Math.abs(f - anchorFret);
+      if (d < bestDist) {
+        bestDist = d;
+        best = f;
+      }
+    }
+    return best;
+  });
+
+  const played = frets.filter((f): f is number => f !== null);
+  return {
+    shape,
+    frets,
+    roles: tpl,
+    minFret: Math.min(...played),
+    maxFret: Math.max(...played),
+  };
+}
+
+// As 5 formas de uma tônica, já ordenadas pela posição no braço (da mais
+// grave para a mais aguda), que é como elas se encadeiam na prática.
+export function cagedShapesOrdered(rootNote: NoteName): CagedResult[] {
+  return CAGED_ORDER.map((s) => cagedShape(rootNote, s)).sort(
+    (a, b) => a.minFret - b.minFret
+  );
+}
+
 export const ALL_NOTES: NoteName[] = [...NOTE_NAMES];

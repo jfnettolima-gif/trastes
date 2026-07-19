@@ -126,6 +126,14 @@ export const MODULOS: Modulo[] = [
       { key: "arpejos.teoria", titulo: "Arpejos", href: "/arpejos" },
     ],
   },
+  {
+    slug: "caged",
+    titulo: "Sistema CAGED",
+    descricao: "As 5 formas de acorde que conectam o braço inteiro e organizam tudo.",
+    licoes: [
+      { key: "caged.teoria", titulo: "Sistema CAGED", href: "/caged" },
+    ],
+  },
 ];
 
 export function todasAsLicoes() {

@@ -52,6 +52,9 @@ export default function AppShell({
             <Link href="/arpejos" className="hover:text-amber-300">
               Arpejos
             </Link>
+            <Link href="/caged" className="hover:text-amber-300">
+              CAGED
+            </Link>
             <Link href="/metronomo" className="hover:text-amber-300">
               Metrônomo
             </Link>
