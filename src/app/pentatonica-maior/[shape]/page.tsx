@@ -5,7 +5,7 @@ import AppShell from "@/components/AppShell";
 import MarkComplete from "@/components/MarkComplete";
 import ScaleShapeView from "@/components/ScaleShapeView";
 
-export default async function PentatonicShapePage({
+export default async function PentatonicaMaiorShapePage({
   params,
 }: {
   params: Promise<{ shape: string }>;
@@ -15,20 +15,24 @@ export default async function PentatonicShapePage({
   if (!Number.isInteger(shapeNumber) || shapeNumber < 1 || shapeNumber > 5) notFound();
 
   const user = await requireUser();
-  const lessonKey = `pentatonica-menor.desenho-${shapeNumber}`;
+  const lessonKey = `pentatonica-maior.desenho-${shapeNumber}`;
   const proximo = shapeNumber < 5 ? shapeNumber + 1 : null;
 
   return (
     <AppShell userName={user.name}>
-      <Link href="/pentatonica-menor" className="text-sm text-amber-700">
-        ← Pentatônica menor
+      <Link href="/pentatonica-maior" className="text-sm text-amber-700">
+        ← Pentatônica maior
       </Link>
       <h1 className="text-2xl font-bold text-amber-900 mt-2">
-        Pentatônica menor · Desenho {shapeNumber}
+        Pentatônica maior · Desenho {shapeNumber}
       </h1>
 
       <div className="card p-6 mt-4">
-        <ScaleShapeView shapeNumber={shapeNumber} scaleKey="pentatonicaMenor" />
+        <ScaleShapeView
+          shapeNumber={shapeNumber}
+          scaleKey="pentatonicaMaior"
+          rootLabel="maior"
+        />
       </div>
 
       <div className="card p-6 mt-4 space-y-3 text-neutral-700 leading-relaxed">
@@ -47,20 +51,21 @@ export default async function PentatonicShapePage({
           agrupe em blocos de 3 e depois de 4, sempre voltando à tônica.
         </p>
         <p>
-          <strong>Memorização:</strong> tente tocar o desenho de olhos fechados ou sem
-          olhar para as mãos, só de ouvido.
+          <strong>Compare com a pentatônica menor:</strong> repare que este desenho
+          usa exatamente as mesmas posições no braço que um desenho da pentatônica
+          menor relativa, só muda qual nota você trata como "casa".
         </p>
         <p>
-          <strong>Lick sugerido:</strong> toque a sequência tônica → b3 → 4 → 5 → b7 →
-          5 → 4 → b3 → tônica, terminando sempre numa nota do acorde (a tônica é a
+          <strong>Lick sugerido:</strong> toque a sequência tônica → 2 → 3 → 5 → 6 →
+          5 → 3 → 2 → tônica, terminando sempre numa nota do acorde (a tônica é a
           escolha mais segura).
         </p>
       </div>
 
       <div className="flex items-center gap-4 mt-6">
-        <MarkComplete lessonKey={lessonKey} path={`/pentatonica-menor/${shapeNumber}`} />
+        <MarkComplete lessonKey={lessonKey} path={`/pentatonica-maior/${shapeNumber}`} />
         {proximo && (
-          <Link href={`/pentatonica-menor/${proximo}`} className="btn-secondary">
+          <Link href={`/pentatonica-maior/${proximo}`} className="btn-secondary">
             Próximo desenho →
           </Link>
         )}

@@ -6,20 +6,41 @@ import {
   asciiTab,
   NoteName,
   pentatonicShapeStarts,
+  ScaleKey,
   shapeWindow,
 } from "@/lib/music";
 import Fretboard from "@/components/Fretboard";
 
-export default function PentatonicShapeView({ shapeNumber }: { shapeNumber: number }) {
-  const [rootNote, setRootNote] = useState<NoteName>("A");
+export default function ScaleShapeView({
+  shapeNumber,
+  scaleKey,
+  shapeReferenceScaleKey,
+  defaultRoot = "A",
+  rootLabel = "menor",
+}: {
+  shapeNumber: number;
+  scaleKey: ScaleKey;
+  // Escala usada só para calcular as casas de início dos 5 desenhos. Útil
+  // para a escala blues, que tradicionalmente usa os mesmos 5 desenhos da
+  // pentatônica menor, apenas com a nota de passagem (b5) adicionada dentro
+  // de cada desenho.
+  shapeReferenceScaleKey?: ScaleKey;
+  defaultRoot?: NoteName;
+  rootLabel?: string;
+}) {
+  const [rootNote, setRootNote] = useState<NoteName>(defaultRoot);
 
-  const starts = useMemo(() => pentatonicShapeStarts(rootNote), [rootNote]);
+  const refScaleKey = shapeReferenceScaleKey ?? scaleKey;
+  const starts = useMemo(
+    () => pentatonicShapeStarts(rootNote, refScaleKey),
+    [rootNote, refScaleKey]
+  );
   const startFret = starts[shapeNumber - 1] ?? 0;
   const [fretStart, fretEnd] = shapeWindow(startFret);
 
   const tab = useMemo(
-    () => asciiTab({ rootNote, scaleKey: "pentatonicaMenor", fretStart, fretEnd }),
-    [rootNote, fretStart, fretEnd]
+    () => asciiTab({ rootNote, scaleKey, fretStart, fretEnd }),
+    [rootNote, scaleKey, fretStart, fretEnd]
   );
 
   return (
@@ -33,7 +54,7 @@ export default function PentatonicShapeView({ shapeNumber }: { shapeNumber: numb
         >
           {ALL_NOTES.map((n) => (
             <option key={n} value={n}>
-              {n} menor
+              {n} {rootLabel}
             </option>
           ))}
         </select>
@@ -44,7 +65,7 @@ export default function PentatonicShapeView({ shapeNumber }: { shapeNumber: numb
 
       <Fretboard
         rootNote={rootNote}
-        scaleKey="pentatonicaMenor"
+        scaleKey={scaleKey}
         fretStart={fretStart}
         fretEnd={fretEnd}
         showControls={false}

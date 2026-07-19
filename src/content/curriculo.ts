@@ -39,6 +39,30 @@ export const MODULOS: Modulo[] = [
       { key: "pentatonica-menor.desenho-5", titulo: "Desenho 5", href: "/pentatonica-menor/5" },
     ],
   },
+  {
+    slug: "pentatonica-maior",
+    titulo: "Pentatônica maior",
+    descricao: "As mesmas 5 posições, agora com som aberto e melódico.",
+    licoes: [
+      { key: "pentatonica-maior.desenho-1", titulo: "Desenho 1", href: "/pentatonica-maior/1" },
+      { key: "pentatonica-maior.desenho-2", titulo: "Desenho 2", href: "/pentatonica-maior/2" },
+      { key: "pentatonica-maior.desenho-3", titulo: "Desenho 3", href: "/pentatonica-maior/3" },
+      { key: "pentatonica-maior.desenho-4", titulo: "Desenho 4", href: "/pentatonica-maior/4" },
+      { key: "pentatonica-maior.desenho-5", titulo: "Desenho 5", href: "/pentatonica-maior/5" },
+    ],
+  },
+  {
+    slug: "escala-blues",
+    titulo: "Escala blues",
+    descricao: "A pentatônica menor com a nota de passagem que dá o tempero do blues.",
+    licoes: [
+      { key: "escala-blues.desenho-1", titulo: "Desenho 1", href: "/escala-blues/1" },
+      { key: "escala-blues.desenho-2", titulo: "Desenho 2", href: "/escala-blues/2" },
+      { key: "escala-blues.desenho-3", titulo: "Desenho 3", href: "/escala-blues/3" },
+      { key: "escala-blues.desenho-4", titulo: "Desenho 4", href: "/escala-blues/4" },
+      { key: "escala-blues.desenho-5", titulo: "Desenho 5", href: "/escala-blues/5" },
+    ],
+  },
 ];
 
 export function todasAsLicoes() {

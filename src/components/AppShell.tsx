@@ -15,7 +15,7 @@ export default function AppShell({
           <Link href="/dashboard" className="font-bold text-lg tracking-tight">
             🎸 Trastes
           </Link>
-          <nav className="flex items-center gap-4 text-sm">
+          <nav className="flex items-center gap-4 text-sm flex-wrap justify-end">
             <Link href="/dashboard" className="hover:text-amber-300">
               Painel
             </Link>
@@ -27,6 +27,12 @@ export default function AppShell({
             </Link>
             <Link href="/pentatonica-menor" className="hover:text-amber-300">
               Pentatônica menor
+            </Link>
+            <Link href="/pentatonica-maior" className="hover:text-amber-300">
+              Pentatônica maior
+            </Link>
+            <Link href="/escala-blues" className="hover:text-amber-300">
+              Escala blues
             </Link>
             <Link href="/metronomo" className="hover:text-amber-300">
               Metrônomo
