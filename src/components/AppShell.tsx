@@ -25,6 +25,9 @@ export default function AppShell({
             <Link href="/localizacao-notas" className="hover:text-amber-300">
               Localizar notas
             </Link>
+            <Link href="/intervalos" className="hover:text-amber-300">
+              Intervalos
+            </Link>
             <Link href="/pentatonica-menor" className="hover:text-amber-300">
               Pentatônica menor
             </Link>

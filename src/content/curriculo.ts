@@ -28,6 +28,15 @@ export const MODULOS: Modulo[] = [
     ],
   },
   {
+    slug: "intervalos",
+    titulo: "Intervalos",
+    descricao: "A base de toda escala e todo acorde: a distância entre duas notas.",
+    licoes: [
+      { key: "intervalos.teoria", titulo: "Teoria dos intervalos", href: "/intervalos" },
+      { key: "intervalos.treino", titulo: "Treino auditivo", href: "/intervalos/treino" },
+    ],
+  },
+  {
     slug: "pentatonica-menor",
     titulo: "Pentatônica menor",
     descricao: "Os 5 desenhos clássicos, conectados e prontos para improvisar.",
