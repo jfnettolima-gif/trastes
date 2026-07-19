@@ -72,6 +72,20 @@ export const MODULOS: Modulo[] = [
       { key: "escala-blues.desenho-5", titulo: "Desenho 5", href: "/escala-blues/5" },
     ],
   },
+  {
+    slug: "escala-maior",
+    titulo: "Escala maior",
+    descricao: "As 7 posições no sistema de 3 notas por corda, a base de toda a teoria.",
+    licoes: [
+      { key: "escala-maior.posicao-1", titulo: "Posição 1", href: "/escala-maior/1" },
+      { key: "escala-maior.posicao-2", titulo: "Posição 2", href: "/escala-maior/2" },
+      { key: "escala-maior.posicao-3", titulo: "Posição 3", href: "/escala-maior/3" },
+      { key: "escala-maior.posicao-4", titulo: "Posição 4", href: "/escala-maior/4" },
+      { key: "escala-maior.posicao-5", titulo: "Posição 5", href: "/escala-maior/5" },
+      { key: "escala-maior.posicao-6", titulo: "Posição 6", href: "/escala-maior/6" },
+      { key: "escala-maior.posicao-7", titulo: "Posição 7", href: "/escala-maior/7" },
+    ],
+  },
 ];
 
 export function todasAsLicoes() {

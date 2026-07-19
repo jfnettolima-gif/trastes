@@ -211,4 +211,95 @@ export function asciiTab(opts: {
   return lines.join("\n");
 }
 
+// Offset absoluto (em semitons) de cada corda solta em relação à 6ª corda,
+// derivado diretamente da afinação (não hardcoded): permite achar a "altura
+// absoluta" de qualquer casa em qualquer corda, o que é necessário para
+// encadear posições de forma musicalmente contínua (ver
+// threeNotesPerStringPositions abaixo).
+function openStringAbsoluteSemitones(): number[] {
+  const offsets = [0];
+  for (let s = 1; s < STANDARD_TUNING.length; s++) {
+    const diff =
+      ((pitchClass(STANDARD_TUNING[s].note) - pitchClass(STANDARD_TUNING[s - 1].note)) % 12 + 12) % 12;
+    offsets.push(offsets[s - 1] + diff);
+  }
+  return offsets;
+}
+
+// Gera as 7 posições de "3 notas por corda" de uma escala diatônica (maior
+// ou qualquer uma das menores), o sistema mais usado para escalas de 7 notas
+// (diferente do sistema de 5 caixas usado nas pentatônicas). O algoritmo
+// simula tocar a escala ascendente nota a nota: em cada corda, toma as 3
+// notas da escala mais próximas em altura, e ao trocar de corda continua
+// exatamente de onde parou (usando altura absoluta, não casa relativa).
+// Isso resolve sozinho, sem regra especial, o ajuste clássico necessário na
+// passagem da 3ª corda (Sol) para a 2ª (Si), que na afinação padrão é uma
+// terça maior em vez de uma quarta justa como as demais cordas.
+export function threeNotesPerStringPositions(
+  rootNote: NoteName,
+  scaleKey: ScaleKey = "escalaMaior"
+): number[][][] {
+  const rootPc = pitchClass(rootNote);
+  const intervals = new Set(SCALES[scaleKey].intervals);
+  const openAbs = openStringAbsoluteSemitones();
+
+  function isScaleTone(s: number, fret: number): boolean {
+    const pc = pitchClassAt(s, fret);
+    const rel = ((pc - rootPc) % 12 + 12) % 12;
+    return intervals.has(rel);
+  }
+
+  function ascendingScaleFrets(s: number, fromFret: number, count: number): number[] {
+    const result: number[] = [];
+    let f = fromFret;
+    while (result.length < count && f < fromFret + 30) {
+      if (isScaleTone(s, f)) result.push(f);
+      f++;
+    }
+    return result;
+  }
+
+  function buildPosition(startFret: number): number[][] {
+    const stringFrets: number[][] = [];
+    const frets0 = ascendingScaleFrets(0, startFret, 3);
+    stringFrets.push(frets0);
+    let lastAbs = openAbs[0] + frets0[2];
+    for (let s = 1; s < 6; s++) {
+      let f = 0;
+      while (!(openAbs[s] + f >= lastAbs && isScaleTone(s, f))) {
+        f++;
+        if (f > 40) break; // salvaguarda, não deve acontecer em uso normal
+      }
+      const fretsS = ascendingScaleFrets(s, f, 3);
+      stringFrets.push(fretsS);
+      lastAbs = openAbs[s] + fretsS[2];
+    }
+    return stringFrets;
+  }
+
+  // Pontos de partida: 7 ocorrências consecutivas da escala na 6ª corda, a
+  // partir da primeira aparição da tônica (a posição 1 sempre começa nela).
+  const scaleFretsOnLowE: number[] = [];
+  for (let f = 0; f <= 24; f++) {
+    if (isScaleTone(0, f)) scaleFretsOnLowE.push(f);
+  }
+  const firstRootIdx = scaleFretsOnLowE.findIndex((f) => pitchClassAt(0, f) === rootPc);
+  const start = firstRootIdx >= 0 ? firstRootIdx : 0;
+  const starts = scaleFretsOnLowE.slice(start, start + 7);
+
+  return starts.map(buildPosition);
+}
+
+// Tablatura em texto para uma posição de 3 notas por corda (frets explícitos
+// por corda, não uma janela retangular uniforme como em asciiTab).
+export function asciiTabFromFrets(stringFrets: number[][]): string {
+  const labels = ["E", "B", "G", "D", "A", "E"]; // 1ª (agudo) -> 6ª (grave)
+  const lines: string[] = [];
+  for (let s = 5; s >= 0; s--) {
+    const parts = stringFrets[s].map((f) => String(f).padStart(2, "0"));
+    lines.push(`${labels[5 - s]}|-${parts.join("-")}-|`);
+  }
+  return lines.join("\n");
+}
+
 export const ALL_NOTES: NoteName[] = [...NOTE_NAMES];
