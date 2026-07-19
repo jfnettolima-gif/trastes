@@ -16,21 +16,21 @@ export default function LandingPage() {
         </div>
 
         <div className="mt-16 grid sm:grid-cols-3 gap-6 text-left">
-          <div className="card bg-amber-50/5 border-amber-100/10 p-5 text-amber-50">
-            <h3 className="font-semibold">Braço interativo</h3>
-            <p className="text-sm text-amber-100/70 mt-1">
+          <div className="rounded-xl bg-white/[0.06] border border-white/10 p-5 text-amber-50">
+            <h3 className="font-semibold text-amber-200">Braço interativo</h3>
+            <p className="text-sm text-amber-100/80 mt-1">
               Clique em qualquer casa, ouça a nota e veja o intervalo em tempo real.
             </p>
           </div>
-          <div className="card bg-amber-50/5 border-amber-100/10 p-5 text-amber-50">
-            <h3 className="font-semibold">Progressão pedagógica</h3>
-            <p className="text-sm text-amber-100/70 mt-1">
+          <div className="rounded-xl bg-white/[0.06] border border-white/10 p-5 text-amber-50">
+            <h3 className="font-semibold text-amber-200">Progressão pedagógica</h3>
+            <p className="text-sm text-amber-100/80 mt-1">
               Um plano de estudo montado a partir do seu nível e dos seus objetivos.
             </p>
           </div>
-          <div className="card bg-amber-50/5 border-amber-100/10 p-5 text-amber-50">
-            <h3 className="font-semibold">Da escala à música</h3>
-            <p className="text-sm text-amber-100/70 mt-1">
+          <div className="rounded-xl bg-white/[0.06] border border-white/10 p-5 text-amber-50">
+            <h3 className="font-semibold text-amber-200">Da escala à música</h3>
+            <p className="text-sm text-amber-100/80 mt-1">
               Não é só decorar desenho: você entende a teoria e aplica em improviso.
             </p>
           </div>
