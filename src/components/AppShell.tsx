@@ -70,6 +70,9 @@ export default async function AppShell({
             <Link href="/tecnicas" className="hover:text-amber-300">
               Técnicas
             </Link>
+            <Link href="/ritmo" className="hover:text-amber-300">
+              Ritmo
+            </Link>
             <Link href="/metronomo" className="hover:text-amber-300">
               Metrônomo
             </Link>

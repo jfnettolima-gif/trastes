@@ -162,6 +162,17 @@ export const MODULOS: Modulo[] = [
       { key: "tecnicas.palm-mute", titulo: "Palm mute", href: "/tecnicas/palm-mute" },
     ],
   },
+  {
+    slug: "ritmo",
+    titulo: "Ritmo e leitura",
+    descricao: "Figuras, compasso, andamento e levadas: o lado do tempo na música.",
+    licoes: [
+      { key: "ritmo.figuras", titulo: "Figuras: duração das notas", href: "/ritmo/figuras" },
+      { key: "ritmo.compasso", titulo: "Compasso e fórmula", href: "/ritmo/compasso" },
+      { key: "ritmo.andamento", titulo: "Andamento e metrônomo", href: "/ritmo/andamento" },
+      { key: "ritmo.levadas", titulo: "Levadas e palhetada", href: "/ritmo/levadas" },
+    ],
+  },
 ];
 
 export function todasAsLicoes() {
