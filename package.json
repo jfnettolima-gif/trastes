@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
+    "postinstall": "prisma generate",
     "start": "next start",
-    "lint": "eslint",
-    "create-user": "node scripts/create-user.mjs"
+    "lint": "eslint"
   },
   "dependencies": {
     "@libsql/client": "^0.17.4",

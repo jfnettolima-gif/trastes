@@ -1,13 +1,19 @@
 import Link from "next/link";
 import { logout } from "@/app/login/actions";
+import { getCurrentUser } from "@/lib/auth";
 
-export default function AppShell({
+export default async function AppShell({
   children,
   userName,
+  isAdmin,
 }: {
   children: React.ReactNode;
   userName?: string;
+  isAdmin?: boolean;
 }) {
+  // Se a página não informar explicitamente, descobrimos aqui se o usuário
+  // logado é admin, para o link "Contas" aparecer em qualquer página.
+  const showAdmin = isAdmin ?? (await getCurrentUser())?.isAdmin ?? false;
   return (
     <div className="min-h-screen bg-amber-50">
       <header className="bg-[#241a12] text-amber-50">
@@ -58,6 +64,11 @@ export default function AppShell({
             <Link href="/metronomo" className="hover:text-amber-300">
               Metrônomo
             </Link>
+            {showAdmin && (
+              <Link href="/admin/usuarios" className="hover:text-amber-300 font-medium text-amber-300">
+                Contas
+              </Link>
+            )}
             {userName && <span className="text-amber-300/80">{userName}</span>}
             <form action={logout}>
               <button className="hover:text-amber-300">Sair</button>

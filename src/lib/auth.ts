@@ -18,3 +18,11 @@ export async function getCurrentUser() {
   if (!session) return null;
   return prisma.user.findUnique({ where: { id: session.userId } });
 }
+
+// Garante que o usuário logado é administrador. Quem não for admin é mandado
+// de volta para o painel (a área de administração some do menu para eles).
+export async function requireAdmin() {
+  const user = await requireUser();
+  if (!user.isAdmin) redirect("/dashboard");
+  return user;
+}
