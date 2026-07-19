@@ -1,0 +1,60 @@
+// Prisma schema do Trastes
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id           String    @id @default(cuid())
+  name         String
+  email        String    @unique
+  passwordHash String
+  level        String // "iniciante" | "intermediario" | "avancado"
+  dailyMinutes Int? // meta diária de estudo escolhida no onboarding
+  onboarding   Json? // respostas brutas da avaliação inicial
+  onboardedAt  DateTime?
+  createdAt    DateTime  @default(now())
+
+  progress ProgressItem[]
+  sessions StudySession[]
+  diary    DiaryEntry[]
+}
+
+// Progresso do aluno em cada "lição" do conteúdo estático (módulos/aulas
+// vivem em código, em src/content, não no banco — o banco só guarda status).
+model ProgressItem {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lessonKey   String // ex: "fundamentos.partes-guitarra", "pentatonica-menor.desenho-1"
+  status      String // "nao_iniciado" | "em_andamento" | "concluido"
+  score       Int? // resultado do teste de compreensão, se houver
+  completedAt DateTime?
+  updatedAt   DateTime  @updatedAt
+
+  @@unique([userId, lessonKey])
+}
+
+model StudySession {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  date        DateTime @default(now())
+  durationMin Int
+  focus       String? // ex: "pentatonica-menor", "improvisacao"
+}
+
+model DiaryEntry {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  date        DateTime @default(now())
+  content     String
+  bpmReached  Int?
+  createdAt   DateTime @default(now())
+}
