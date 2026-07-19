@@ -181,6 +181,14 @@ export const MODULOS: Modulo[] = [
       { key: "backing-tracks.pratica", titulo: "Praticar com backing track", href: "/backing-tracks" },
     ],
   },
+  {
+    slug: "dicionario-acordes",
+    titulo: "Dicionário de acordes",
+    descricao: "Consulte como montar qualquer acorde no braço, em qualquer tom.",
+    licoes: [
+      { key: "dicionario-acordes.consulta", titulo: "Consultar acordes", href: "/dicionario-acordes" },
+    ],
+  },
 ];
 
 export function todasAsLicoes() {
