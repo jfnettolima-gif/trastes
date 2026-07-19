@@ -40,6 +40,9 @@ export default function AppShell({
             <Link href="/escala-maior" className="hover:text-amber-300">
               Escala maior
             </Link>
+            <Link href="/escalas-menores" className="hover:text-amber-300">
+              Escalas menores
+            </Link>
             <Link href="/metronomo" className="hover:text-amber-300">
               Metrônomo
             </Link>

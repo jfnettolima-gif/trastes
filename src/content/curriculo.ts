@@ -86,6 +86,16 @@ export const MODULOS: Modulo[] = [
       { key: "escala-maior.posicao-7", titulo: "Posição 7", href: "/escala-maior/7" },
     ],
   },
+  {
+    slug: "escalas-menores",
+    titulo: "Escalas menores",
+    descricao: "Menor natural, harmônica e melódica, também em 3 notas por corda.",
+    licoes: [
+      { key: "escalas-menores.natural", titulo: "Menor natural", href: "/escalas-menores/natural" },
+      { key: "escalas-menores.harmonica", titulo: "Menor harmônica", href: "/escalas-menores/harmonica" },
+      { key: "escalas-menores.melodica", titulo: "Menor melódica", href: "/escalas-menores/melodica" },
+    ],
+  },
 ];
 
 export function todasAsLicoes() {
