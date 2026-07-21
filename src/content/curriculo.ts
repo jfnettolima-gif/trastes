@@ -189,6 +189,62 @@ export const MODULOS: Modulo[] = [
       { key: "dicionario-acordes.consulta", titulo: "Consultar acordes", href: "/dicionario-acordes" },
     ],
   },
+  {
+    slug: "identificador",
+    titulo: "Identificador reverso",
+    descricao: "Marque notas no braço e descubra que acorde formam e em que escalas cabem.",
+    licoes: [
+      { key: "identificador.usar", titulo: "Identificar acordes e escalas", href: "/identificador" },
+    ],
+  },
+  {
+    slug: "afinacoes",
+    titulo: "Afinações alternativas",
+    descricao: "Drop D, meio tom abaixo, afinações abertas: veja o braço se recalcular.",
+    licoes: [
+      { key: "afinacoes.explorar", titulo: "Explorar afinações", href: "/afinacoes" },
+    ],
+  },
+  {
+    slug: "assistente-improviso",
+    titulo: "Assistente de improviso",
+    descricao: "Cole os acordes de uma música e descubra o tom e a escala para solar.",
+    licoes: [
+      { key: "assistente-improviso.usar", titulo: "Analisar uma progressão", href: "/assistente-improviso" },
+    ],
+  },
+  {
+    slug: "repertorio",
+    titulo: "Repertório de cifra viva",
+    descricao: "Progressões clássicas e músicas de domínio público com acordes clicáveis.",
+    licoes: [
+      { key: "repertorio.explorar", titulo: "Explorar o repertório", href: "/repertorio" },
+    ],
+  },
+  {
+    slug: "play-along",
+    titulo: "Play-along de licks",
+    descricao: "Frases que andam no braço no tempo, para tocar junto e decorar.",
+    licoes: [
+      { key: "play-along.praticar", titulo: "Tocar junto com licks", href: "/play-along" },
+    ],
+  },
+  {
+    slug: "treino-acordes",
+    titulo: "Treino auditivo de acordes",
+    descricao: "Reconheça de ouvido se um acorde é maior, menor, dominante, diminuto...",
+    licoes: [
+      { key: "treino-acordes.praticar", titulo: "Treinar o ouvido", href: "/treino-acordes" },
+    ],
+  },
+  {
+    slug: "speed-trainer",
+    titulo: "Speed trainer",
+    descricao: "Metrônomo que sobe o andamento sozinho para você ganhar velocidade.",
+    licoes: [
+      { key: "speed-trainer.praticar", titulo: "Treinar velocidade", href: "/speed-trainer" },
+    ],
+  },
 ];
 
 export function todasAsLicoes() {

@@ -64,11 +64,29 @@ export default async function AppShell({
             <Link href="/dicionario-acordes" className="hover:text-amber-300">
               Dicionário de acordes
             </Link>
+            <Link href="/identificador" className="hover:text-amber-300">
+              Identificador reverso
+            </Link>
+            <Link href="/afinacoes" className="hover:text-amber-300">
+              Afinações
+            </Link>
             <Link href="/circulo-de-quintas" className="hover:text-amber-300">
               Círculo das quintas
             </Link>
             <Link href="/progressoes-harmonicas" className="hover:text-amber-300">
               Progressões
+            </Link>
+            <Link href="/assistente-improviso" className="hover:text-amber-300">
+              Assistente de improviso
+            </Link>
+            <Link href="/repertorio" className="hover:text-amber-300">
+              Repertório
+            </Link>
+            <Link href="/play-along" className="hover:text-amber-300">
+              Play-along de licks
+            </Link>
+            <Link href="/treino-acordes" className="hover:text-amber-300">
+              Treino de acordes
             </Link>
             <Link href="/tecnicas" className="hover:text-amber-300">
               Técnicas
@@ -81,6 +99,9 @@ export default async function AppShell({
             </Link>
             <Link href="/metronomo" className="hover:text-amber-300">
               Metrônomo
+            </Link>
+            <Link href="/speed-trainer" className="hover:text-amber-300">
+              Speed trainer
             </Link>
             {showAdmin && (
               <Link href="/admin/usuarios" className="hover:text-amber-300 font-medium text-amber-300">
