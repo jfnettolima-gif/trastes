@@ -3,6 +3,13 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 
 const secretKey = process.env.SESSION_SECRET;
+// Fail-closed: sem segredo, o app não sobe. Evita cair no caso perigoso em
+// que a chave viraria a string "undefined" (sessões trivialmente forjáveis).
+if (!secretKey || secretKey.length < 32) {
+  throw new Error(
+    "SESSION_SECRET ausente ou fraco (mínimo 32 caracteres). Defina um segredo forte."
+  );
+}
 const encodedKey = new TextEncoder().encode(secretKey);
 
 export type Level = "iniciante" | "intermediario" | "avancado";

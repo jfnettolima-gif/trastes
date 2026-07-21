@@ -27,12 +27,15 @@ export async function login(
   }
 
   const user = await prisma.user.findUnique({ where: { email: parsed.data.email } });
-  if (!user) {
-    return { error: "E-mail ou senha inválidos." };
-  }
 
-  const ok = await bcrypt.compare(parsed.data.password, user.passwordHash);
-  if (!ok) {
+  // Hash "chamariz": se o e-mail não existir, ainda gastamos o mesmo tempo de
+  // um bcrypt.compare, para não revelar por tempo de resposta quais e-mails
+  // têm conta (enumeração de usuários).
+  const DUMMY_HASH = "$2b$10$pC/RX/UDjgtIqmX4WsHcm.EFSY5b.A.S3wj/l8AXYxOFVHfW/26ou";
+  const hashParaComparar = user?.passwordHash ?? DUMMY_HASH;
+  const ok = await bcrypt.compare(parsed.data.password, hashParaComparar);
+
+  if (!user || !ok) {
     return { error: "E-mail ou senha inválidos." };
   }
 
