@@ -58,8 +58,17 @@ export default async function AppShell({
             <Link href="/arpejos" className="hover:text-amber-300">
               Arpejos
             </Link>
+            <Link href="/triades" className="hover:text-amber-300">
+              Tríades no braço
+            </Link>
             <Link href="/caged" className="hover:text-amber-300">
               CAGED
+            </Link>
+            <Link href="/acordes-abertos" className="hover:text-amber-300">
+              Acordes abertos
+            </Link>
+            <Link href="/pestana" className="hover:text-amber-300">
+              Pestana
             </Link>
             <Link href="/dicionario-acordes" className="hover:text-amber-300">
               Dicionário de acordes
@@ -90,6 +99,9 @@ export default async function AppShell({
             </Link>
             <Link href="/tecnicas" className="hover:text-amber-300">
               Técnicas
+            </Link>
+            <Link href="/palhetada" className="hover:text-amber-300">
+              Palhetada e mão direita
             </Link>
             <Link href="/ritmo" className="hover:text-amber-300">
               Ritmo

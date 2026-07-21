@@ -127,11 +127,35 @@ export const MODULOS: Modulo[] = [
     ],
   },
   {
+    slug: "triades",
+    titulo: "Tríades no braço",
+    descricao: "As formas de 3 notas (tônica, terça, quinta) e suas 3 inversões em cordas vizinhas.",
+    licoes: [
+      { key: "triades.explorar", titulo: "Explorar tríades e inversões", href: "/triades" },
+    ],
+  },
+  {
     slug: "caged",
     titulo: "Sistema CAGED",
     descricao: "As 5 formas de acorde que conectam o braço inteiro e organizam tudo.",
     licoes: [
       { key: "caged.teoria", titulo: "Sistema CAGED", href: "/caged" },
+    ],
+  },
+  {
+    slug: "acordes-abertos",
+    titulo: "Acordes abertos",
+    descricao: "Os primeiros acordes e o treino de troca limpa entre eles no tempo.",
+    licoes: [
+      { key: "acordes-abertos.praticar", titulo: "Acordes abertos e troca", href: "/acordes-abertos" },
+    ],
+  },
+  {
+    slug: "pestana",
+    titulo: "Acordes com pestana",
+    descricao: "As formas móveis de Mi e de Lá que tocam qualquer acorde pelo braço.",
+    licoes: [
+      { key: "pestana.praticar", titulo: "Acordes com pestana", href: "/pestana" },
     ],
   },
   {
@@ -160,6 +184,18 @@ export const MODULOS: Modulo[] = [
       { key: "tecnicas.vibrato", titulo: "Vibrato", href: "/tecnicas/vibrato" },
       { key: "tecnicas.slide", titulo: "Slide", href: "/tecnicas/slide" },
       { key: "tecnicas.palm-mute", titulo: "Palm mute", href: "/tecnicas/palm-mute" },
+    ],
+  },
+  {
+    slug: "palhetada",
+    titulo: "Palhetada e mão direita",
+    descricao: "Palhetada alternada, de economia, sweep, tapping e dedilhado híbrido.",
+    licoes: [
+      { key: "palhetada.empunhadura-alternada", titulo: "Empunhadura e palhetada alternada", href: "/palhetada/empunhadura-alternada" },
+      { key: "palhetada.palhetada-economia", titulo: "Palhetada de economia", href: "/palhetada/palhetada-economia" },
+      { key: "palhetada.sweep-picking", titulo: "Sweep picking", href: "/palhetada/sweep-picking" },
+      { key: "palhetada.tapping", titulo: "Tapping", href: "/palhetada/tapping" },
+      { key: "palhetada.dedilhado-hibrido", titulo: "Dedilhado e palhetada híbrida", href: "/palhetada/dedilhado-hibrido" },
     ],
   },
   {
