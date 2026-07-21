@@ -6,6 +6,7 @@ export type Modulo = {
 };
 
 export const MODULOS: Modulo[] = [
+  // ── Bloco 1: fundamentos e orientação no braço ─────────────────────────
   {
     slug: "fundamentos",
     titulo: "Fundamentos",
@@ -36,6 +37,37 @@ export const MODULOS: Modulo[] = [
       { key: "intervalos.treino", titulo: "Treino auditivo", href: "/intervalos/treino" },
     ],
   },
+
+  // ── Bloco 2: primeiros acordes e ritmo (tocar música cedo) ─────────────
+  {
+    slug: "acordes-abertos",
+    titulo: "Acordes abertos",
+    descricao: "Os primeiros acordes e o treino de troca limpa entre eles no tempo.",
+    licoes: [
+      { key: "acordes-abertos.praticar", titulo: "Acordes abertos e troca", href: "/acordes-abertos" },
+    ],
+  },
+  {
+    slug: "ritmo",
+    titulo: "Ritmo e leitura",
+    descricao: "Figuras, compasso, andamento e levadas: o lado do tempo na música.",
+    licoes: [
+      { key: "ritmo.figuras", titulo: "Figuras: duração das notas", href: "/ritmo/figuras" },
+      { key: "ritmo.compasso", titulo: "Compasso e fórmula", href: "/ritmo/compasso" },
+      { key: "ritmo.andamento", titulo: "Andamento e metrônomo", href: "/ritmo/andamento" },
+      { key: "ritmo.levadas", titulo: "Levadas e palhetada", href: "/ritmo/levadas" },
+    ],
+  },
+  {
+    slug: "pestana",
+    titulo: "Acordes com pestana",
+    descricao: "As formas móveis de Mi e de Lá que tocam qualquer acorde pelo braço.",
+    licoes: [
+      { key: "pestana.praticar", titulo: "Acordes com pestana", href: "/pestana" },
+    ],
+  },
+
+  // ── Bloco 3: escalas e primeiro improviso ──────────────────────────────
   {
     slug: "pentatonica-menor",
     titulo: "Pentatônica menor",
@@ -72,6 +104,8 @@ export const MODULOS: Modulo[] = [
       { key: "escala-blues.desenho-5", titulo: "Desenho 5", href: "/escala-blues/5" },
     ],
   },
+
+  // ── Bloco 4: teoria musical e harmonia ─────────────────────────────────
   {
     slug: "escala-maior",
     titulo: "Escala maior",
@@ -97,11 +131,35 @@ export const MODULOS: Modulo[] = [
     ],
   },
   {
+    slug: "triades",
+    titulo: "Tríades no braço",
+    descricao: "As formas de 3 notas (tônica, terça, quinta) e suas 3 inversões em cordas vizinhas.",
+    licoes: [
+      { key: "triades.explorar", titulo: "Explorar tríades e inversões", href: "/triades" },
+    ],
+  },
+  {
+    slug: "arpejos",
+    titulo: "Arpejos",
+    descricao: "As notas de cada acorde espalhadas pelo braço, as notas-alvo do solo.",
+    licoes: [
+      { key: "arpejos.teoria", titulo: "Arpejos", href: "/arpejos" },
+    ],
+  },
+  {
     slug: "campo-harmonico",
     titulo: "Campo harmônico",
     descricao: "Os acordes que nascem de cada escala e como usá-los em progressões.",
     licoes: [
       { key: "campo-harmonico.teoria", titulo: "Campo harmônico", href: "/campo-harmonico" },
+    ],
+  },
+  {
+    slug: "caged",
+    titulo: "Sistema CAGED",
+    descricao: "As 5 formas de acorde que conectam o braço inteiro e organizam tudo.",
+    licoes: [
+      { key: "caged.teoria", titulo: "Sistema CAGED", href: "/caged" },
     ],
   },
   {
@@ -116,46 +174,6 @@ export const MODULOS: Modulo[] = [
       { key: "modos-gregos.mixolidio", titulo: "Mixolídio", href: "/modos-gregos/mixolidio" },
       { key: "modos-gregos.eolio", titulo: "Eólio", href: "/modos-gregos/eolio" },
       { key: "modos-gregos.locrio", titulo: "Lócrio", href: "/modos-gregos/locrio" },
-    ],
-  },
-  {
-    slug: "arpejos",
-    titulo: "Arpejos",
-    descricao: "As notas de cada acorde espalhadas pelo braço, as notas-alvo do solo.",
-    licoes: [
-      { key: "arpejos.teoria", titulo: "Arpejos", href: "/arpejos" },
-    ],
-  },
-  {
-    slug: "triades",
-    titulo: "Tríades no braço",
-    descricao: "As formas de 3 notas (tônica, terça, quinta) e suas 3 inversões em cordas vizinhas.",
-    licoes: [
-      { key: "triades.explorar", titulo: "Explorar tríades e inversões", href: "/triades" },
-    ],
-  },
-  {
-    slug: "caged",
-    titulo: "Sistema CAGED",
-    descricao: "As 5 formas de acorde que conectam o braço inteiro e organizam tudo.",
-    licoes: [
-      { key: "caged.teoria", titulo: "Sistema CAGED", href: "/caged" },
-    ],
-  },
-  {
-    slug: "acordes-abertos",
-    titulo: "Acordes abertos",
-    descricao: "Os primeiros acordes e o treino de troca limpa entre eles no tempo.",
-    licoes: [
-      { key: "acordes-abertos.praticar", titulo: "Acordes abertos e troca", href: "/acordes-abertos" },
-    ],
-  },
-  {
-    slug: "pestana",
-    titulo: "Acordes com pestana",
-    descricao: "As formas móveis de Mi e de Lá que tocam qualquer acorde pelo braço.",
-    licoes: [
-      { key: "pestana.praticar", titulo: "Acordes com pestana", href: "/pestana" },
     ],
   },
   {
@@ -174,6 +192,8 @@ export const MODULOS: Modulo[] = [
       { key: "progressoes-harmonicas.teoria", titulo: "Progressões harmônicas", href: "/progressoes-harmonicas" },
     ],
   },
+
+  // ── Bloco 5: técnica das duas mãos ─────────────────────────────────────
   {
     slug: "tecnicas",
     titulo: "Técnicas de mão",
@@ -199,24 +219,15 @@ export const MODULOS: Modulo[] = [
     ],
   },
   {
-    slug: "ritmo",
-    titulo: "Ritmo e leitura",
-    descricao: "Figuras, compasso, andamento e levadas: o lado do tempo na música.",
+    slug: "speed-trainer",
+    titulo: "Speed trainer",
+    descricao: "Metrônomo que sobe o andamento sozinho para você ganhar velocidade.",
     licoes: [
-      { key: "ritmo.figuras", titulo: "Figuras: duração das notas", href: "/ritmo/figuras" },
-      { key: "ritmo.compasso", titulo: "Compasso e fórmula", href: "/ritmo/compasso" },
-      { key: "ritmo.andamento", titulo: "Andamento e metrônomo", href: "/ritmo/andamento" },
-      { key: "ritmo.levadas", titulo: "Levadas e palhetada", href: "/ritmo/levadas" },
+      { key: "speed-trainer.praticar", titulo: "Treinar velocidade", href: "/speed-trainer" },
     ],
   },
-  {
-    slug: "backing-tracks",
-    titulo: "Backing tracks",
-    descricao: "Bases de acompanhamento em vários estilos e tons para praticar as escalas.",
-    licoes: [
-      { key: "backing-tracks.pratica", titulo: "Praticar com backing track", href: "/backing-tracks" },
-    ],
-  },
+
+  // ── Bloco 6: ferramentas de consulta e prática aplicada ────────────────
   {
     slug: "dicionario-acordes",
     titulo: "Dicionário de acordes",
@@ -242,19 +253,11 @@ export const MODULOS: Modulo[] = [
     ],
   },
   {
-    slug: "assistente-improviso",
-    titulo: "Assistente de improviso",
-    descricao: "Cole os acordes de uma música e descubra o tom e a escala para solar.",
+    slug: "backing-tracks",
+    titulo: "Backing tracks",
+    descricao: "Bases de acompanhamento em vários estilos e tons para praticar as escalas.",
     licoes: [
-      { key: "assistente-improviso.usar", titulo: "Analisar uma progressão", href: "/assistente-improviso" },
-    ],
-  },
-  {
-    slug: "repertorio",
-    titulo: "Repertório de cifra viva",
-    descricao: "Progressões clássicas e músicas de domínio público com acordes clicáveis.",
-    licoes: [
-      { key: "repertorio.explorar", titulo: "Explorar o repertório", href: "/repertorio" },
+      { key: "backing-tracks.pratica", titulo: "Praticar com backing track", href: "/backing-tracks" },
     ],
   },
   {
@@ -266,19 +269,27 @@ export const MODULOS: Modulo[] = [
     ],
   },
   {
+    slug: "repertorio",
+    titulo: "Repertório de cifra viva",
+    descricao: "Progressões clássicas e músicas de domínio público com acordes clicáveis.",
+    licoes: [
+      { key: "repertorio.explorar", titulo: "Explorar o repertório", href: "/repertorio" },
+    ],
+  },
+  {
+    slug: "assistente-improviso",
+    titulo: "Assistente de improviso",
+    descricao: "Cole os acordes de uma música e descubra o tom e a escala para solar.",
+    licoes: [
+      { key: "assistente-improviso.usar", titulo: "Analisar uma progressão", href: "/assistente-improviso" },
+    ],
+  },
+  {
     slug: "treino-acordes",
     titulo: "Treino auditivo de acordes",
     descricao: "Reconheça de ouvido se um acorde é maior, menor, dominante, diminuto...",
     licoes: [
       { key: "treino-acordes.praticar", titulo: "Treinar o ouvido", href: "/treino-acordes" },
-    ],
-  },
-  {
-    slug: "speed-trainer",
-    titulo: "Speed trainer",
-    descricao: "Metrônomo que sobe o andamento sozinho para você ganhar velocidade.",
-    licoes: [
-      { key: "speed-trainer.praticar", titulo: "Treinar velocidade", href: "/speed-trainer" },
     ],
   },
 ];
